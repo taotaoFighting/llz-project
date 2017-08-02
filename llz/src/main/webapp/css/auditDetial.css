@@ -1,0 +1,16 @@
+#rowBox{
+	margin-left: 2%;
+	width: 96%;
+	background-color: white;
+	margin-top: 44px;
+}
+#rowLabel{
+	padding-top: 6px;
+	margin-left: 1em;
+}
+#buttonPosition{
+	margin-top: 6%;
+}
+#auditButton{
+	margin-top: 6%;
+}

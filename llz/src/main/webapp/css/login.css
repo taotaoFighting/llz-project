@@ -1,0 +1,11 @@
+.row{
+	display: inline-block;
+	margin-top: 5%;
+}
+.passwordAndUsername{
+	text-align: center;
+	padding-top: 10%;
+	color: #005F81;
+	margin-left:25%;
+	width: 50%;
+}

@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    min-width: 320px;
+    background: #FFFFFF;
+    font-family: "Microsoft YaHei", 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 7px;
+    line-height: 1.4285em;
+    color: rgba(0, 0, 0, 0.87);
+    font-smoothing: antialiased;
+}

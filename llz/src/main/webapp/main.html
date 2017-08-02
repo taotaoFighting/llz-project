@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link href="./css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
+		<link rel="stylesheet" type="text/css" href="./resources/cola.css">
+		<link rel="stylesheet" type="text/css" href="./css/main.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="v-box">
+			<div class="box title">
+				<h3 style="line-height: 40px;">xxx管理系统</h3>
+			</div>
+			<div class="flex-box">
+				<div class="h-box">
+					<div class="box navigation">
+					<c-tree id="fileTree" itemClick="itemClick">
+						<template name="node-default">
+							<div>
+								<span c-bind="node.title"></span>
+							</div>
+						</template>
+					</c-tree>
+				</div>
+				<div class="flex-box">
+					<c-iframe path="./mainIframe.html" style="height: 99%;"></c-iframe>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="./resources/jquery-2.1.3.js"></script> 
+		<script src="./resources/3rd.js"></script>
+		<script src="./resources/semantic.js"></script>
+		<script src="./resources/cola.js"></script>
+		<script src="./resources/i18n/zh/cola.js"></script>
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript">
+			cola(function(model){
+				
+				model.set({
+					nodes:[{
+						title:'菜单',
+						childrenNode:[{
+							title:'游戏管理',
+							childrenNode:[{
+								title:'游戏集'
+							}]
+						},{
+							title:'用户管理',
+							childrenNode:[]
+						},{
+							title:'流量管理',
+							childrenNode:[]
+						}]
+						
+					}]
+				});
+				
+				model.action({
+					itemClick:function(self,arg){
+				
+					var title = arg.item.get("data")._data.title;
+					if (title == "游戏集"){
+						alert('游戏集')
+//							cola.widget("mainIFrame").getContentWindow().location.href = "Project.html";
+						}else if (title == ""){
+							cola.widget("mainIFrame").getContentWindow().location.href = "ProjectManager.html";
+						} else if (title == ""){
+							cola.widget("mainIFrame").getContentWindow().location.href = "AppleyTime.html";
+						}else if (title == ""){
+							cola.widget("mainIFrame").getContentWindow().location.href = "TaskManager.html";
+						}else if (title == ""){
+							cola.widget("mainIFrame").getContentWindow().location.href = "myTask.html";
+						}
+					
+					}
+				});
+				
+				model.widgetConfig({
+					fileTree:{
+						$type:"tree",
+						highlightCurrentItem:false,
+						bind:{
+							expression:"node in nodes",
+							child:{
+								recursive:true,
+								expression:"node in node.childrenNode"
+							}
+						}
+					}
+				});
+				
+				
+			});
+		</script>
+	</body>
+</html>

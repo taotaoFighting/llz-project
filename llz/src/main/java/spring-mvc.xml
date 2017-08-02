@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+					http://www.springframework.org/schema/aop 
+       				http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+					http://www.springframework.org/schema/context 
+					http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+					http://www.springframework.org/schema/mvc 
+					http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	
+   <!-- 1. 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+   <context:component-scan base-package="com.pm.controller" />
+   <mvc:annotation-driven/> 
+   
+   <mvc:resources location="/js/" mapping="/js/**"/>
+   <mvc:resources location="/css/" mapping="/css/**"/>
+   
+   <!-- 2.添加对静态文件的访问 -->
+   <mvc:default-servlet-handler/>
+   
+    <!-- 配置资源文件,防止被拦截 -->
+    <mvc:resources location="/resources/" mapping="/resources/**"/>  
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/view/js/" mapping="/js/**"/>  
+    <mvc:resources location="/WEB-INF/view/css/" mapping="/css/**"/>
+   
+   <!-- 拦截器  
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <bean class="com.pm.filter.UserSecurityInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <value>/tologin</value>
+                        <value>/launch.html</value>
+                        <value>/login</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    -->
+   
+   <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/views/" />
+        <property name="suffix" value=".html" />
+    </bean>
+    
+    <!-- 引入配置文件中的参数 
+	<context:property-placeholder location="classpath:congif.properties" />-->
+	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="maxUploadSize" value="50485760"></property>
+		<property name="resolveLazily" value="true"></property>
+	</bean>
+
+	<!-- 对传入的url进行一些处理，这个<span style="font-family: Arial, Helvetica, sans-serif;">UploadFileUtils类所在路径需要根据你实际放置到项目的路径一致，这个类我下面提供了，建完这个类后别忘记把class中的路径替换掉</span>-->
+	<bean class="com.pm.util.UploadFileUtils">
+		<property name="downloadUrl" value="${upload.file.url}"/>
+	</bean>
+	
+	<!-- 异常处理 -->
+	<bean class="com.pm.util.CustomExceptionResolver"></bean>
+   
+   
+</beans>

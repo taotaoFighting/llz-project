@@ -1,0 +1,45 @@
+#itemLineHeight{
+	line-height: 2em;
+}
+#segmentedControl{
+	width: 50%;
+	/*font-size: 0.5em;*/
+	margin-top: -2.5em;
+}
+#rightAddImage{
+	width: 1.5em;
+	margin-top: 0.8em;
+	margin-left: 85%;
+}
+.mui-card .mui-control-content {
+	padding: 10px;
+}
+			
+.mui-control-content {
+	height: 100%;
+}
+.mui-card .mui-control-content {
+		padding: 10px;
+}
+#inputFrom{
+	margin-left: 5%;
+	width: 90%;
+}
+
+#queryInput{
+	margin-bottom: 1em;
+}
+#liRow{
+background-color: gainsboro;
+padding: 0em 0em 0.8em 0em;	
+}
+#boxRow{
+	background-color: white;
+	padding-left: 1em;
+	font-size: 1.2em;
+}
+#labelRow{
+}
+#line{
+	border-bottom: solid 1px;border-color: gainsboro;padding-top: 0.5em;
+}

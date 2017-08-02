@@ -1,0 +1,98 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- 配置连接池: -->
+	<context:component-scan base-package="com.pm"></context:component-scan>
+	<!-- 引入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置C3P0连接池: -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	
+
+	<!-- Hibernate的相关信息 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置Hibernate的其他的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		
+		<property name="packagesToScan" value="com.pm.entity">
+		
+		</property>
+		 
+		<!-- -->
+		<!-- 映射实体类的几种方式
+		<property name="mappingResources"> 
+			<list> 
+				<value>com/pm/entity/TPfile.hbm.xml</value> 
+				<value>com/pm/entity/TProject.hbm.xml</value>
+				<value>com/pm/entity/TProjectMember.hbm.xml</value>
+				<value>com/pm/entity/TProjectTask.hbm.xml</value>
+				<value>com/pm/entity/TUser.hbm.xml</value>
+				<value>com/pm/entity/TAppleyTime.hbm.xml</value>
+			</list> 
+		</property> 
+		  -->
+		
+	<!-- 	 <property name="annotatedClasses">  
+	        <list>  
+	            <value>com.bstek.entity.Student</value>
+	            <value>com.bstek.entity.Items</value>  
+	        </list>  
+    	</property>   -->
+		  
+	</bean>
+
+	<!-- 上传文件  -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	<!-- 打开注解 -->
+	<context:annotation-config />
+	
+	<!-- 开启HibernateTemplate，并且为其注入SessionFactory 使用HibernateTemplate不太方便的就是要获取session得通过getSessionFactory()方法获取 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
+</beans>

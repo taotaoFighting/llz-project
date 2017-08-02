@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
+		<link rel="stylesheet" type="text/css" href="./resources/cola.css">
+		<link rel="stylesheet" type="text/css" href="./css/advice.css">
+	</head>
+
+	<body>
+		<div class="v-box">
+			<div class="box" style="height: 44px;">
+				<header class="mui-bar mui-bar-nav" style="background-color: darkgoldenrod;">
+				    <h1 class="mui-title" style="color: white;">I NEED YOU</h1>
+				</header>
+			</div>
+			<div class="v-box">
+				<div class="box" style="padding-left: 3%;padding-top:10%;width: 94%;color: #005F81;">
+					<label>&nbsp;&nbsp;&nbsp;&nbsp;想搞事情么？想提升自己的能力么？加入我们吧，我们会带你走的更远！</label>
+				</div>
+				<div class="v-box" style="padding-top: 10%;color: #005F81;margin-left: 3%;width: 93%;">
+					<div class="box">
+						<label>需要你的idea：</label><c-textarea c-bind="data.idea" c-widget="width:100%;height:20%"></c-textarea>
+					</div>
+					<div class="box" id="row">
+						<label>需要你的advice：</label><c-textarea c-bind="data.advice" c-widget="width:100%;height:20%"></c-textarea>
+					</div>
+					<div class="box" id="row">
+						<label>需要你的name：</label><c-input c-bind="data.name" c-widget="width:100%"></c-input>
+					</div>
+					<div class="box" style="text-align: center;padding-top: 20%;">
+						<c-button color="teal" c-widget="caption:提交;width:70%;click:commit" ></c-button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="./resources/jquery-2.1.3.js"></script> 
+		<script src="./resources/3rd.js"></script>
+		<script src="./resources/semantic.js"></script>
+		<script src="./resources/cola.js"></script>
+		<script src="./resources/i18n/zh/cola.js"></script>
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript">
+			cola(function(model){
+				model.set("data",{});
+				
+				model.action({
+					commit:function(){
+						
+						if(!model.get("data").get("idea")){
+							
+							mui.toast('请输入ided',{ duration:'short', type:'div' });
+							
+							return;
+						}
+						if(!model.get("data").get("advice")){
+							
+							mui.toast('advice',{ duration:'short', type:'div' });
+							
+							return;
+						}
+						if(!model.get("data").get("name")){
+							
+							mui.toast('请输入name',{ duration:'short', type:'div' });
+							
+							return;
+						}
+						
+						$.ajax({
+							type: "POST",
+							contentType:'application/json;charset=UTF-8',
+							url: "advice",
+							//提交的数据
+							data: JSON.stringify(model.get("data")),
+							//返回数据的格式
+							datatype: "json", //"xml", "html", "script", "json", "jsonp", "text".
+							success: function(data) {
+								mui.toast('sucess!',{ duration:'short', type:'div' });
+								mui.openWindow({
+								    url: 'adviceList.html', 
+								    id:'adviceList',
+								    styles:{
+			    						popGesture:'none'	
+			    					}
+							  	});
+							},
+							//调用出错执行的函数
+							error: function(e) {
+								//请求出错处理
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

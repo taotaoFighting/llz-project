@@ -1,0 +1,19 @@
+
+.content{
+	
+}
+.title{
+	text-align: center;
+	border-bottom: solid 1px #e5e5e5;
+}
+.navigation{
+	height: 100%;
+	width: 10%;
+	border-right: solid 1px #e5e5e5;
+}
+
+.ui.tree .child-nodes {
+    display: none;
+    overflow: visible;
+    margin-left: 1.25em !important;
+}
