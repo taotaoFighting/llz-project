@@ -17,19 +17,15 @@ public class Users implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private String username;
 	private String password;
+	private String username;
+	private String type;
+	private String identifyCode;
 
 	// Constructors
 
 	/** default constructor */
 	public Users() {
-	}
-
-	/** full constructor */
-	public Users(String username, String password) {
-		this.username = username;
-		this.password = password;
 	}
 
 	// Property accessors
@@ -45,7 +41,16 @@ public class Users implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "USERNAME_")
+	@Column(name = "PASSWORD_", length = 100)
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Column(name = "USERNAME_", length = 100)
 	public String getUsername() {
 		return this.username;
 	}
@@ -54,13 +59,22 @@ public class Users implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "PASSWORD_")
-	public String getPassword() {
-		return this.password;
+	@Column(name = "TYPE_")
+	public String getType() {
+		return this.type;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	@Column(name = "IDENTIFY_CODE_", length = 100)
+	public String getIdentifyCode() {
+		return identifyCode;
+	}
+
+	public void setIdentifyCode(String identifyCode) {
+		this.identifyCode = identifyCode;
 	}
 
 }

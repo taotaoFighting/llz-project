@@ -1,0 +1,39 @@
+
+
+调用接口须知：
+1.服务器地址：http://47.52.21.213:8080
+
+
+
+1.获取验证码接口
+    url: /sms/snedSmsCode
+            请求方式 ：post
+            参数：无
+	成功返回实例：
+	{
+	  "status": 200,
+	  "msg": "sucess",
+	  "object": null
+	}
+
+2.注册接口
+	url: /user/signUp
+	请求方式：post
+	参数：
+	String password; //登陆密码
+	String username; //用户姓名即手机号
+	String type;	 //类型   0：用户注册   1：后台注册
+	String identifyCode; //验证码
+	成功返回示例：
+	{
+	  "status": 200,
+	  "msg": "sucess",
+	  "object": {
+	    "id": "402881eb5dacfac9015dad100c6f0006",
+	    "password": "123456",
+	    "username": "17621252538",
+	    "type": null,
+	    "identifyCode": "393786"
+	  }
+	}
+	

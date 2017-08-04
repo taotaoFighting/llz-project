@@ -5,6 +5,16 @@ public class Status {
 	private int status;
 	
 	private String msg;
+	
+	private Object object;
+
+	public Object getObject() {
+		return object;
+	}
+
+	public void setObject(Object object) {
+		this.object = object;
+	}
 
 	public int getStatus() {
 		return status;
