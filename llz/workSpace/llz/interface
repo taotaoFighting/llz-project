@@ -36,4 +36,24 @@
 	    "identifyCode": "393786"
 	  }
 	}
+
+3.登陆接口
+	url:/user/signIn
+	请求方式：post
+	参数：
+	"password": "123456",
+	"username": "17621252538",
+	成功返回示例：
+	{
+	  "status": 1,
+	  "msg": "登陆成功",
+	  "object": {
+	    "id": "000000005dad11f4015dad13960a0000",
+	    "password": "123456",
+	    "username": "17621252538",
+	    "type": null,
+	    "identifyCode": "519332"
+	  }
+	}
+	
 	

@@ -41,5 +41,11 @@ public class UsersController {
 		
 		return status;
 	}
+	
+	@RequestMapping(value="/signIn",method=RequestMethod.POST)
+	public Status signIn(@RequestBody Users user) {
+		
+		return usersService.queryUserByUserNameAndPassword(user);
+	}
 
 }
