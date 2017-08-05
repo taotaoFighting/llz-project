@@ -57,6 +57,7 @@
 	}
 	
 	4.菜系枚举接口
+	url: /enum/cuisine/list
 	请求方式：get
 	参数：无
 	返回示例：
