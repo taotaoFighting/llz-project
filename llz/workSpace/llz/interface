@@ -69,5 +69,39 @@
 	    "updateTime": 1501901172000
 	  }
 	]
+
+5.全部菜品
+	url: /dishes/dishesList
+	请求方式：get
+	参数：无
+	返回示例：
+	[
+	  {
+	    "id": "1",
+	    "cuisineId": "1",
+	    "title": "西红柿鸡蛋",
+	    "describution": "好吃不贵 经济实惠",
+	    "img": "暂无",
+	    "createTime": 1501914536000,
+	    "updateTime": 1501914539000
+	  }
+	]
+	
+6.指定菜系的全部菜品
+	url: /dishes/dishesListBycuisineId/{id}  注意{id} 整体替换为指定菜系id
+	请求方式：get
+	参数：无
+	返回示例：
+	[
+	  {
+	    "id": "1",
+	    "cuisineId": "1",
+	    "title": "西红柿鸡蛋",
+	    "describution": "好吃不贵 经济实惠",
+	    "img": "暂无",
+	    "createTime": 1501914536000,
+	    "updateTime": 1501914539000
+	  }
+	]
 	
 	

@@ -6,14 +6,14 @@ public class Status {
 	
 	private String msg;
 	
-	private Object object;
+	private Object data;
 
-	public Object getObject() {
-		return object;
+	public Object getData() {
+		return data;
 	}
 
-	public void setObject(Object object) {
-		this.object = object;
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 	public int getStatus() {

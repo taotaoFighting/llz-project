@@ -36,7 +36,7 @@ public class UsersService {
 		}
 		status.setMsg("登陆成功");
 		status.setStatus(1);
-		status.setObject(list.get(0));
+		status.setData(list.get(0));
 		
 		return status;
 		

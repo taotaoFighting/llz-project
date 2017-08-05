@@ -29,7 +29,7 @@ public class UsersController {
 		if(identifyCodeService.isUsed(user.getUsername(), user.getIdentifyCode())){
 
 			usersService.saveUser(user);
-			status.setObject(user);
+			status.setData(user);
 			status.setMsg("sucess");
 			status.setStatus(200);
 			return status;
