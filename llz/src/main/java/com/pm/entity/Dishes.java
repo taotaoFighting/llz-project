@@ -1,11 +1,16 @@
 package com.pm.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -22,8 +27,8 @@ public class Dishes implements java.io.Serializable {
 	private String title;
 	private String describution;
 	private String img;
-	private Timestamp createTime;
-	private Timestamp updateTime;
+	private Date createTime;
+	private Date updateTime;
 
 	// Constructors
 
@@ -36,16 +41,6 @@ public class Dishes implements java.io.Serializable {
 		this.cuisineId = cuisineId;
 	}
 
-	/** full constructor */
-	public Dishes(String cuisineId, String title, String describution,
-			String img, Timestamp createTime, Timestamp updateTime) {
-		this.cuisineId = cuisineId;
-		this.title = title;
-		this.describution = describution;
-		this.img = img;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-	}
 
 	// Property accessors
 	@GenericGenerator(name = "generator", strategy = "uuid.hex")
@@ -97,20 +92,22 @@ public class Dishes implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATE_TIME_", length = 19)
-	public Timestamp getCreateTime() {
+	@Temporal(TemporalType.DATE)
+	public Date getCreateTime() {
 		return this.createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
 	@Column(name = "UPDATE_TIME_", length = 19)
-	public Timestamp getUpdateTime() {
+	@Temporal(TemporalType.DATE)
+	public Date getUpdateTime() {
 		return this.updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 

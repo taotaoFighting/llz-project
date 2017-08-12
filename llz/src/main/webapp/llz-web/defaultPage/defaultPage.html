@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
+    	<link rel="stylesheet" type="text/css" href="./resources/cola.css">
+    	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	</head>
+	<body>
+	<c-carousel id="carousel" class="carousel" bind="item in items" height="300">
+		<template>
+			<img c-widget="image;src:{{'./images/'+item.img+'.jpg'}}" />
+		</template>
+	</c-carousel>
+	<blocks class="small-cols-1 medium-cols-2 large-cols-3" style="text-align: center;">
+		<item>
+			<div class="card"></div>
+		</item>
+		<item>
+			<div class="card"></div>
+		</item>
+		<item>
+			<div class="card"></div>
+		</item>
+	</block-layout>
+	
+	<script src="./resources/jquery-2.1.3.js"></script>
+		<script src="./resources/3rd.js"></script>
+		<script src="./resources/semantic.js"></script>
+		<script src="./resources/cola.js"></script>
+		<script type="text/javascript">
+			cola(function(model){
+				 
+				 model.describe("items",{
+				 	provider:{
+				 		url:"image/1",
+				 	}
+				 })
+			});
+	</script>
+	</body>
+</html>

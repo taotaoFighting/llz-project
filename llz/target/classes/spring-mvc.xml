@@ -50,7 +50,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/views/" />
+        <property name="prefix" value="/llz-web/" />
         <property name="suffix" value=".html" />
     </bean>
     

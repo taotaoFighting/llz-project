@@ -12,8 +12,20 @@ import com.pm.entity.Padvice;
 public class LoginController {
 
 	@RequestMapping(value = "/login")
-	public String allAdvices() {
+	public String login() {
 		
-		return "advice";
+		return "login/login";
+	}
+	
+	@RequestMapping(value = "/main")
+	public String main() {
+		
+		return "main/main";
+	}
+	
+	@RequestMapping(value = "/defaultPage")
+	public String defaultPage() {
+		
+		return "defaultPage/defaultPage";
 	}
 }
