@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>菜品管理</title>
+		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
+    	<link rel="stylesheet" type="text/css" href="./resources/cola.css">
+    	<link rel="stylesheet" type="text/css" href="./css/foodManager.css">
+	</head>
+	<body>
+		<div class="content v-box">
+			<c-menu>
+			    <a icon="plus" caption="添加" click="add"></a>
+			    <a icon="minus" caption="删除"></a>
+			    <a icon="edit" caption="修改" ></a>
+			    <div class="right menu">
+			    <item>
+			    	<label>类型：</label>
+			     <c-dropdown items="{{items}}" bind="type" openmode="drop" valueProperty="enumCode" textProperty="enumName" width="100"></c-dropdown>
+			   	</item>
+			    <item>
+			     <c-input icon="search"></c-input>
+			   	</item>
+			      <item>
+			        <c-button  caption="查询" class="primary mini"></c-button>
+			      </item>
+			    </div>
+			</c-menu>
+			<c-listView id="foodList" style="width: 60%;margin: 0 auto;">
+				<template name="row">
+					<div class="food-row h-box">
+						<img class="food-img" c-widget="image;src:{{'../../images/'+food.img+'.jpg'}}"/>
+						<div class="dec v-box">
+							<div class="box">
+								<label class="title">菜名：</label><label c-bind="food.title"></label>
+							</div>
+							<div class="lable-div box">
+								<label class="title">简述：</label><label c-bind="food.describution"></label>
+							</div>
+							<div class="lable-div box">
+								<label class="title">上传者：</label><label c-bind="food.createTime"></label>
+							</div>
+							<div class="lable-div box">
+								<label class="title">上传时间：</label><label c-bind="">哈哈</label>
+							</div>
+						</div>
+					</div>
+				</template>
+				
+			</c-listView>
+		</div>
+		
+		<script src="./resources/jquery-2.1.3.js"></script>
+		<script src="./resources/3rd.js"></script>
+		<script src="./resources/semantic.js"></script>
+		<script src="./resources/cola.js"></script>
+		<script type="text/javascript">
+			cola(function(model){
+				 
+				  model.describe("items",{
+				 	provider:{
+				 		url:"enum/cuisine/list",
+					 	success:function(self,arg){
+					 		model.get('items').insert({enumCode:'0',enumName:'全部'},'begin')
+					 		model.set('type','0');
+					 	}
+				 	}
+				 });
+				 
+				 model.describe("foods",{
+				 	provider:{
+				 		url:"dishes/dishesList",
+				 		sucess:function(self,arg){
+				 			console.log(arg)
+				 		}
+				 	}
+				 });
+				 
+				 model.action({
+				 	add:function(){
+				 		alert('add')
+				 	}
+				 })
+				 
+				 model.widgetConfig({
+		            foodList: {
+		                $type: "listView",
+		                bind: "food in foods",
+		                height:window.screen.height - 110,
+		                highlightCurrentItem:false,
+//		                autoLoadPage:true,
+		                getItemTemplate: function(arg) {
+		                	
+		                    return "row";
+		                }
+		            }
+	        	});
+			});
+		</script>
+	</body>
+</html>

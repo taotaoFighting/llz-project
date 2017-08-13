@@ -1,0 +1,24 @@
+.content{
+	
+	/*background-color: aquamarine;*/
+}
+
+.food-row{
+	width: 60%;
+	border-bottom: solid 1px #ff8f33;
+}
+
+.food-img{
+	width: 30%;
+}
+
+.dec{
+	padding-left: 3%;
+}
+.title{
+	color: #ff8f33;
+}
+
+.lable-div{
+	margin-top: 8px;
+}

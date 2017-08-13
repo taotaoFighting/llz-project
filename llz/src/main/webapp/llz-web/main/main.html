@@ -16,14 +16,14 @@
 			<div class="content h-box">
 				<div class="left-nav">
 					<c-buttongroup class="vertical" style="text-align: left;">
-					    <c-button class="basic" icon="grid layout icon">菜品管理</c-button>
+					    <c-button class="basic" icon="grid layout icon" click="navButton">菜品管理</c-button>
 					    <c-button class="basic" icon="add user icon">用户管理</c-button>
 					    <c-button class="basic" icon="search icon">报表查询</c-button>
 					    <c-button class="basic" icon="settings icon">权限设置</c-button>
 					</c-buttongroup>
 				</div>
 				<div class="main-frame box">
-					<c-iframe name="frame" path="./defaultPage" style="height: 99.1%;width: 100%;">
+					<c-iframe id="mainFrame" name="frame" path="./defaultPage" style="height: 99.1%;width: 100%;">
 					</c-iframe>
 				</div>
 			</div>
@@ -41,6 +41,12 @@
 				 		url:"image/1",
 				 	}
 				 })
+				 
+				 model.action({
+				 	navButton:function(self,arg){
+				 		cola.widget("mainFrame").getContentWindow().location.href = "./foodManager"
+				 	}
+				 });
 			});
 		</script>
 	</body>

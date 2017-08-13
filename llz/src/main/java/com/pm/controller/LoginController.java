@@ -28,4 +28,10 @@ public class LoginController {
 		
 		return "defaultPage/defaultPage";
 	}
+	
+	@RequestMapping(value = "/foodManager")
+	public String foodManager() {
+		
+		return "foodManager/foodManager";
+	}
 }
