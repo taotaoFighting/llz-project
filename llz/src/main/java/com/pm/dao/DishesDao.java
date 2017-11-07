@@ -10,11 +10,13 @@ import com.pm.entity.Dishes;
 @Repository
 public class DishesDao extends BaseDao {
 
+	@SuppressWarnings("unchecked")
 	public List<Dishes> dishesList() {
 		
 		return this.getHibernateTemplate().find("from Dishes");
 	}
 	
+@SuppressWarnings("unchecked")
 public List<Dishes> dishesListByCuidineId(String cuisineId) {
 	
 	System.out.print("cuisineId = "+cuisineId + ".");

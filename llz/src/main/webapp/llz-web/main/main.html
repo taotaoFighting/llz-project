@@ -13,20 +13,48 @@
 			<div class="header box">
 				菜品管理
 			</div>
-			<div class="content h-box">
-				<div class="left-nav">
-					<c-buttongroup class="vertical" style="text-align: left;">
-					    <c-button class="basic" icon="grid layout icon" click="navButton">菜品管理</c-button>
-					    <c-button class="basic" icon="add user icon">用户管理</c-button>
-					    <c-button class="basic" icon="search icon">报表查询</c-button>
-					    <c-button class="basic" icon="settings icon">权限设置</c-button>
-					</c-buttongroup>
-				</div>
-				<div class="main-frame box">
-					<c-iframe id="mainFrame" name="frame" path="./defaultPage" style="height: 99.1%;width: 100%;">
+<!--			<div class="content h-box">
+-->				<!--<div class="left-nav">-->
+					<c-tab id="tabControl" style="height: 100%;" direction="left">
+					    <nav>
+					        <tabs>
+					        	<tab name="home" caption="首页" class="active" icon="setting"></tab>
+					            <tab name="dishes" caption="菜品管理" icon="setting"></tab>
+					            <tab name="user" caption="用户管理" icon="dashboard"></tab>
+					            <tab name="order" caption="订单管理" icon="dashboard"></tab>
+					            <tab name="forms" caption="报表展示" icon="table icon"></tab>
+					             <tab name="account" caption="账户" icon="dashboard"></tab>
+					        </tabs>
+					    </nav>
+					    <contents>
+					    	 <content name="home" class="active">
+					            <c-iframe id="mainFrame" name="frame" path="./defaultPage" style="height: 99.1%;width: 100%;">
+								</c-iframe>
+					        </content>
+					        <content name="dishes">
+					            <c-iframe id="mainFrame" name="frame" path="./foodManager" style="height: 99.1%;width: 100%;">
+								</c-iframe>
+					        </content>
+					        <content name="user">
+					            user 用户管理
+					        </content>
+					         <content name="order">
+					            order 订单管理
+					        </content>
+					         <content name="forms">
+					            forms 报表管理
+					        </content>
+					         <content name="account">
+					            account  账户资本
+					        </content>
+					    </contents>
+					</c-tab>
+				<!--</div>-->
+				<!--<div class="main-frame box">
+					<!--<c-iframe id="mainFrame" name="frame" path="./defaultPage" style="height: 99.1%;width: 100%;">
 					</c-iframe>
-				</div>
-			</div>
+				</div>-->
+			<!--</div>-->
 		</div>
 		
 		<script src="./resources/jquery-2.1.3.js"></script>

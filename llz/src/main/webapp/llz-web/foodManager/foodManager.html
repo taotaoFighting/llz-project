@@ -6,13 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
     	<link rel="stylesheet" type="text/css" href="./resources/cola.css">
     	<link rel="stylesheet" type="text/css" href="./css/foodManager.css">
+    	<link rel="stylesheet" type="text/css" href="./css/foodManagerGrid.css">
 	</head>
 	<body>
 		<div class="content v-box">
 			<c-menu>
 			    <a icon="plus" caption="添加" click="add"></a>
-			    <a icon="minus" caption="删除"></a>
-			    <a icon="edit" caption="修改" ></a>
 			    <div class="right menu">
 			    <item>
 			    	<label>类型：</label>
@@ -26,76 +25,252 @@
 			      </item>
 			    </div>
 			</c-menu>
-			<c-listView id="foodList" style="width: 60%;margin: 0 auto;">
-				<template name="row">
-					<div class="food-row h-box">
-						<img class="food-img" c-widget="image;src:{{'../../images/'+food.img+'.jpg'}}"/>
-						<div class="dec v-box">
-							<div class="box">
-								<label class="title">菜名：</label><label c-bind="food.title"></label>
-							</div>
-							<div class="lable-div box">
-								<label class="title">简述：</label><label c-bind="food.describution"></label>
-							</div>
-							<div class="lable-div box">
-								<label class="title">上传者：</label><label c-bind="food.createTime"></label>
-							</div>
-							<div class="lable-div box">
-								<label class="title">上传时间：</label><label c-bind="">哈哈</label>
-							</div>
+			<div class="flex-box">
+				<ul id="list" class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+					<li c-repeat="food in foods" style="padding: 5px;">
+						<div style="background-color: firebrick;height: 100%;">
+							<div class="" style="width: 100%;height: 70%;">
+						       <img c-widget="image;src:{{'../images/'+food.img}};" style="height: 100%;width: 100%;border: 1px solid #18a689;"/>
+						    </div>
 						</div>
+						
+					</li>
+				</ul>
+			</div>
+			<!--<c-split-pane direction="left" position="40%">
+			    <div class="pane">
+			    	<div class="food-content">
+			    		<ul id="list" class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
+						</ul>
+						<div id="foodList">
+							<template name="row">
+						       <div class="h-box" style="height: 150px;">
+						       	<div class="" style="width: 50%;height: 100%;">
+						       		<img c-widget="image;src:{{'../images/'+food.img}};" style="height: 100%;width: 100%;border: 1px solid #18a689;"/>
+						       	</div>
+						       	<div class="v-box" style="width: 50%;height: 100%;padding-left: 10px;border: 1px solid #18a689;">
+						       		<label class="">菜品名称: <span c-bind="food.title"></span></label>
+						       		<label class="">菜品描述: <span c-bind="food.description"></span></label>
+						       		<label class="time">上传时间: <span c-bind="food.createTime"></span></label>
+						       	</div>
+						       </div>
+						    </template>
+						</div>
+			    	</div>
+			    </div>
+			    <c-split-pane class="pane" position="50%" direction="top">
+			        <div class="pane">
+			        	<span style="padding: 10px;">字典分类维护</span>
+			        </div>
+			        <div class="pane">
+			        	<span style="padding: 10px;">字典项维护</span>
+			        </div>
+			    </c-split-pane>
+			</c-split-pane>-->
+			<div id="addFood" c-widget="Dialog;" style="width: 600px;">
+				<div id="header" class="header" style="text-align: center;">新增菜品</div>
+				<div class="newAdd">
+					<div style="padding: 10px;">
+						<label>菜品名称：</label><c-input bind="dishes.title"></c-input>
+						<label>菜品种类：</label><c-dropdown items="{{items}}" c-bind="dishes.cuisineId" openmode="drop" valueProperty="enumCode" textProperty="enumName" postOnInput="true"></c-dropdown>
 					</div>
-				</template>
-				
-			</c-listView>
+					<div style="padding-left: 10px;padding-right: 10px;">
+						<label>菜品描述：</label><c-textarea height="20px" bind="dishes.description"></c-textarea>
+					</div>
+					<div>
+						<form id="upfile" style="margin-top: 5px;margin-left: 10px;">
+							<input type="file" name="file" id="upload"/>
+							<input value="清除" type="button" id="deleteFile"/>
+						</form>
+					</div>
+					<img c-widget="image;src:{{'../images/'+dishes.img}};" style="height: 60px;"/>
+				</div>
+				<div class="actions" style="text-align: center;">
+					<div c-widget="button; caption:取消;click:cancle;"></div>
+					<div c-widget="button; caption:确定;click:ensure;class:blue"></div>
+				</div>
+			</div>
 		</div>
-		
 		<script src="./resources/jquery-2.1.3.js"></script>
 		<script src="./resources/3rd.js"></script>
 		<script src="./resources/semantic.js"></script>
 		<script src="./resources/cola.js"></script>
 		<script type="text/javascript">
 			cola(function(model){
+				
+				model.set({
+					dishes:{},
+				});
 				 
 				  model.describe("items",{
 				 	provider:{
 				 		url:"enum/cuisine/list",
 					 	success:function(self,arg){
-					 		model.get('items').insert({enumCode:'0',enumName:'全部'},'begin')
-					 		model.set('type','0');
+//					 		model.get('items').insert({enumCode:'0',enumName:'全部'},'begin')
+//					 		model.set('type','0');
 					 	}
 				 	}
 				 });
 				 
 				 model.describe("foods",{
 				 	provider:{
-				 		url:"dishes/dishesList",
-				 		sucess:function(self,arg){
-				 			console.log(arg)
+				 		url:"./dishes/dishesList",
+				 		success:function(self,arg){
+//				 			$('#list').xAppend(data2doms(arg.result));
 				 		}
 				 	}
 				 });
 				 
+				 model.get('foods');
+				 
 				 model.action({
 				 	add:function(){
-				 		alert('add')
+				 		model.set('dishes',{});
+				 		$('#header')[0].innerText = '新增菜品';
+				 		cola.widget('addFood').show();
+				 	},
+				 	cancle:function(){
+				 		cola.widget('addFood').hide();
+				 	},
+				 	ensure:function(){
+				 		console.log(JSON.stringify(model.get('dishes')));
+				 		
+				 		if($('#header')[0].innerText == '新增菜品'){
+				 			$.ajax({
+							type: 'post',
+								contentType: 'application/json;charset=UTF-8',
+								url: "dishes/dishe",
+								data: JSON.stringify(model.get('dishes')),
+								datatype: "json",
+								success: function(data) {
+	//								$('#list').xAppend(item2dom(data));
+									model.get('foods').insert(data,'begin');
+									cola.widget('addFood').hide();
+								},
+								error: function() {
+								}
+							});
+				 		}else{ //编辑菜品
+				 			$.ajax({
+								type: 'put',
+								contentType: 'application/json;charset=UTF-8',
+								url: "dishes/dishe",
+								data: JSON.stringify(model.get('dishes')),
+								datatype: "json",
+								success: function(data) {
+									model.get('foods').current.set(data);
+									cola.widget('addFood').hide();
+								},
+								error: function() {
+								}
+							});
+				 		}
+				 	},
+				 	itemDoubleClick:function(self,arg){
+				 		console.log(arg.item);
+				 		model.set('dishes',arg.item.toJSON());
+				 		$('#header')[0].innerText = '编辑菜品';
+				 		cola.widget('addFood').show();
 				 	}
 				 })
+				 //将数据数组转化为doms对象数组
+				 function data2doms(arr){
+				 	var doms = [];
+				 	for(var i =0 ; i < arr.length ; i++){
+				 		doms.push(item2dom(arr[i]));
+				 	}
+				 	return doms;
+				 }
+				 //将 数据转化为一条 do数据
+				 function item2dom(item){
+				 	item={
+				 		tagName:"li",
+				 		style:{
+				 			'margin-top':'10px'
+				 		},
+				 		content:{
+				 			tagName:'h-box',class:'card',
+				 			style:{
+				 			},
+				 			content:[
+				 				{
+				 					tagName:'img',
+					 				src:'../images/'+item.img,
+					 				style:{
+					 					height:'100%',
+					 					width:'50%',
+					 					padding: '5px'
+					 				}
+				 				},
+				 				{
+				 					tagName:'div',class:'desc',
+				 					content:[{
+				 						tagName:'div',
+				 						content:[{
+				 							tagName:'span',class:'title',
+				 							content:'菜名：'
+				 						},{
+				 							tagName:'span',
+				 							content:item.title
+				 						}]
+				 					},{
+				 						tagName:'div',
+				 						content:[{
+				 							tagName:'span',class:'title',
+				 							content:'简介：'
+				 						},{
+				 							tagName:'span',
+				 							content:item.description
+				 						}]
+				 					},{
+				 						tagName:'div',class:'time',
+				 						content:[{
+				 							tagName:'span',class:'title',
+				 							content:'上传时间：'
+				 						},{
+				 							tagName:'span',
+				 							content:item.createTime
+				 						}]
+				 					}]
+				 				}
+				 			]
+				 		}
+				 	}
+				 	
+				 	return item;
+				 }
 				 
+				$('#upload').change(function(){
+	        		var formData = new FormData($("#upfile")[0]);
+					$.ajax({
+				        url: 'file',
+				        type: 'POST',
+				        cache: false,
+				        data: formData,
+				        processData: false,
+				        contentType: false,
+				        success: function(data) {
+							console.log(data)
+							model.get('dishes').set('img',data.path)
+						}
+				   });
+				});
+				
 				 model.widgetConfig({
 		            foodList: {
 		                $type: "listView",
 		                bind: "food in foods",
-		                height:window.screen.height - 110,
+		                height:window.screen.height - 220,
 		                highlightCurrentItem:false,
+		                itemDoubleClick:'itemDoubleClick',
 //		                autoLoadPage:true,
 		                getItemTemplate: function(arg) {
-		                	
 		                    return "row";
 		                }
 		            }
 	        	});
 			});
+			
 		</script>
 	</body>
 </html>

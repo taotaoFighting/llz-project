@@ -1,5 +1,6 @@
 package com.pm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,13 @@ public class DishesService {
 		
 		return dishesDao.dishesListByCuidineId(cuisineId);
 	}
+	
+public void addDishes(Dishes dishes) {
+		dishes.setCreateTime(new Date());
+		dishesDao.addEntity(dishes);
+	}
+
+public void upadteDishes(Dishes dishes) {
+	dishesDao.updateEntity(dishes);
+}
 }

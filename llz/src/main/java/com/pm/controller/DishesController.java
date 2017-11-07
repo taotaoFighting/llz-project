@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,22 @@ public class DishesController {
 	public List<Dishes> dishesListByCuisineId(@PathVariable("id") String cuisineId) {
 		
 		return dishesService.dishesListByCuisineId(cuisineId);
+		
+	}
+	
+	@RequestMapping(value="/dishe",method=RequestMethod.POST)
+	public Dishes addDishes(@RequestBody Dishes dishes) {
+		
+		dishesService.addDishes(dishes);
+		return dishes;
+		
+	}
+	
+	@RequestMapping(value="/dishe",method=RequestMethod.PUT)
+	public Dishes updateDishes(@RequestBody Dishes dishes) {
+		
+		dishesService.upadteDishes(dishes);
+		return dishes;
 		
 	}
 }

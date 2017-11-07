@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>工作台</title>
+<meta name="context-path" th:content="@{/}"/> 
+ <script src="../../resources/nprogress/nprogress.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../resources/nprogress/nprogress.css">
+ <link rel="stylesheet" type="text/css" href="../../resources/semantic.css">
+ <link rel="stylesheet" type="text/css" href="../../resources/cola.css">
+ <link rel="stylesheet" type="text/css" href="../../common/common.css">
+ <link rel="stylesheet" type="text/css" href="./workbench.css">
+</head>
+<body>
+	<script type="text/javascript">
+		NProgress.configure({
+			showSpinner : false,
+			minimum : 0.3
+		})
+		NProgress.start();
+	</script>
+	<div class="v-box" style="height:100%">
+		
+		<div class="box workbench-user">
+			<div class="h-box">
+				<div class="box ui primary inverted segment" style="width:20%">
+					<div class="h-box" style="height: 60px;">
+						<div class="box" style="width:40%;text-align: center">
+							<img c-widget="image; class:circular; src:{{'../../'+user.avatar}}" style="height: 100%;">
+						</div>
+						<div class="box" style="width:60%; line-height: 30px;">
+								<div class="text"><span>你好，</span><span c-bind="user.username"></span></div>
+								<div class="text"><span c-bind="currentTime"></span></div>
+						</div>
+					</div>
+				</div>
+				<div class="box" style="width:80%">
+				 <div class="ui middle aligned stackable grid container">
+			      <div class="row">
+				        <!--<div class="three wide column">
+				       		<h4 class="ui header"><a c-widget="link;">4</a><span>人</span></h4>
+				          <div class="ui inverted">
+				          	发现自己健康状况有些糟糕
+				          </div>
+				        </div>
+				        <span class="workbench-divide">/</span>
+				        <div class="three wide column">
+				       		<h4 class="ui header"><a c-widget="link;">66</a><span>人</span></h4>
+				          <div class="ui inverted">
+				          	发现自己健康有风险
+				          </div>
+				        </div>
+			        	<span class="workbench-divide">/</span>
+				        <div class="three wide column">
+				       		<h4 class="ui header"><a c-widget="link;">66</a><span>人</span></h4>
+				          <div class="ui inverted">
+				          	健康值得大家称赞
+				          </div>
+				        </div>
+			        	<span class="workbench-divide">/</span>
+				        <div class="three wide column">
+				       		<h4 class="ui header"><a c-widget="link;">245</a><span>人</span></h4>
+				          <div class="ui inverted">
+				          	正密切关注自己的健康
+				          </div>
+				        </div>
+			        	<span class="workbench-divide">/</span>
+				        <div class="two wide column">
+				       		<h4 class="ui header"><a c-widget="link;">800</a><span>人</span></h4>
+				          <div class="ui inverted">
+				          	正检测自己的健康
+				          </div>
+				        </div>-->
+			      </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+		
+	    <div class="box">
+			<ul id="workbench-list" class="small-block-grid-2 medium-block-grid-5 large-block-grid-7">
+				<li c-repeat="item in hinsCollectList">
+					<c-corner c-class="showHideCorner(item.cornerNumber)" c-widget="Corner; class:primary" c-bind="toDecimal(item.cornerNumber)"></c-corner>
+					<a c-widget="link; href:; click:{{openCollectItem(item)}}">
+						<div class="workbench-divmargin" c-onmouseout="hideDeletIcon($dom)" c-onmouseover="showDeletIcon($dom)">
+							<i class="huge icon" c-class="item.icon"></i>
+							<div class="workbench-listname" c-bind="item.name"></div>
+							<i class="remove circle outline big icon" style="float: left; opacity: 0.6; font-size: 1.5em; padding: 4px 0 0 2px; display:none" c-onclick="deletCollect(item)"></i>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="flex-box"></div>
+		
+		<div clas="box footer" id="workbench-footer"> 
+			<div class="row">
+				<!--<label>
+					<span class="workbench-footerleft">用户总数：</span><span c-bind="usersFooter.total"></span>
+				</label>
+				<label>
+					<span>在线用户：</span><span c-bind="usersFooter.online"></span>
+				</label>
+				<label>
+					<span>在线医生：</span><span c-bind="usersFooter.onlinedoctor"></span>
+				</label>
+				<label>
+					<span>所属机构：</span><span>中国人保健康</span>
+				</label>-->
+			</div>
+		</div>
+	
+	</div>
+	
+</body>
+
+<script src="../../resources/jquery-2.1.3.js"></script>
+  <script src="../../resources/jquery.cookie.js"></script>
+  <script src="../../resources/3rd.js"></script>
+  <script src="../../resources/semantic.js"></script>
+  <script src="../../resources/cola.js" charset="UTF-8"></script>
+  <script src="../../common/common.js"></script> 
+  <script src="./workbench.js"></script>
+</html>

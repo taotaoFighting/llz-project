@@ -6,25 +6,47 @@
 		<link rel="stylesheet" type="text/css" href="./resources/semantic.css">
     	<link rel="stylesheet" type="text/css" href="./resources/cola.css">
     	<link rel="stylesheet" type="text/css" href="./css/main.css">
+    	<link rel="stylesheet" type="text/css" href="./css/grid.css">
 	</head>
 	<body>
-	<c-carousel id="carousel" class="carousel" bind="item in items" height="300">
-		<template>
-			<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
-		</template>
-	</c-carousel>
-	<blocks class="small-cols-1 medium-cols-2 large-cols-3" style="text-align: center;">
-		<item>
-			<div class="card"></div>
-		</item>
-		<item>
-			<div class="card"></div>
-		</item>
-		<item>
-			<div class="card"></div>
-		</item>
-	</block-layout>
-	
+		
+		<ul id="list" class="small-block-grid-6 medium-block-grid-6 large-block-grid-6" style="padding-top: 3%;">
+			<li class="content-li">
+				<c-carousel tag="carousel" class="carousel" bind="item in items">
+					<template>
+						<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
+					</template>
+				</c-carousel>
+			</li>
+			<li class="content-li">
+				<c-carousel tag="carousel" class="carousel" bind="item in items">
+					<template>
+						<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
+					</template>
+				</c-carousel>
+			</li>
+			<li class="content-li">
+				<c-carousel tag="carousel" class="carousel" bind="item in items">
+					<template>
+						<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
+					</template>
+				</c-carousel>
+			</li>
+			<li class="content-li">
+				<c-carousel tag="carousel" class="carousel" bind="item in items">
+					<template>
+						<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
+					</template>
+				</c-carousel>
+			</li>
+			<li class="content-li">
+				<c-carousel tag="carousel" class="carousel" bind="item in items">
+					<template>
+						<img c-widget="image;src:{{'../../images/'+item.img+'.jpg'}}" />
+					</template>
+				</c-carousel>
+			</li>
+		</ul>
 	<script src="./resources/jquery-2.1.3.js"></script>
 		<script src="./resources/3rd.js"></script>
 		<script src="./resources/semantic.js"></script>
@@ -35,6 +57,14 @@
 				 model.describe("items",{
 				 	provider:{
 				 		url:"image/1",
+				 	}
+				 });
+				 
+				 cola.on('ready',function(){
+				 	var carArr = cola.tag('carousel');
+				 	
+				 	for(var i = 0 ; i < carArr.length ; i+=2){
+				 		carArr[i].play("3000");
 				 	}
 				 })
 			});

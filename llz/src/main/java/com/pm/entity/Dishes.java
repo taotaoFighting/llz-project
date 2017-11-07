@@ -25,7 +25,7 @@ public class Dishes implements java.io.Serializable {
 	private String id;
 	private String cuisineId;
 	private String title;
-	private String describution;
+	private String description;
 	private String img;
 	private Date createTime;
 	private Date updateTime;
@@ -74,12 +74,12 @@ public class Dishes implements java.io.Serializable {
 	}
 
 	@Column(name = "DESCRIBUTION_")
-	public String getDescribution() {
-		return this.describution;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setDescribution(String describution) {
-		this.describution = describution;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Column(name = "IMG_")

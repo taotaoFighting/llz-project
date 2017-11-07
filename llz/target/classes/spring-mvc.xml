@@ -30,23 +30,21 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/view/js/" mapping="/js/**"/>  
     <mvc:resources location="/WEB-INF/view/css/" mapping="/css/**"/>
+    <mvc:resources location="/frame/" mapping="/frame/**"/>
    
-   <!-- 拦截器  
+   <!-- 拦截器  list内表示不拦截的url -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*" />
             <bean class="com.pm.filter.UserSecurityInterceptor">
                 <property name="excludedUrls">
                     <list>
-                        <value>/tologin</value>
-                        <value>/launch.html</value>
                         <value>/login</value>
                     </list>
                 </property>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
-    -->
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

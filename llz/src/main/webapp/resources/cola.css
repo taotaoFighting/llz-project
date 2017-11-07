@@ -1329,7 +1329,7 @@ messages .list:not(.ui) li {
 message .list:not(.ui) li:before,
 messages .list:not(.ui) li:before {
   position: absolute;
-  content: '•';
+  content: '鈥�;
   left: -1em;
   height: 100%;
   vertical-align: baseline;
@@ -5606,6 +5606,7 @@ messages {
 .ui.iframe {
   display: block;
   position: relative;
+  height: 100%;
 }
 .ui.iframe > iframe {
   width: 100%;
@@ -6493,7 +6494,7 @@ tab {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: -27px;
   bottom: 0;
 }
 .ui.c-tab.left-tab,

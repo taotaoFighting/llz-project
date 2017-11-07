@@ -34,24 +34,20 @@ public class UserSecurityInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
 			Object arg2) throws Exception {
-		
 		String requestUri = arg0.getRequestURI();
 		loger.info("size = "+this.excludedUrls.size());
 		loger.info("requestUri = "+requestUri);
         for (String url : excludedUrls) {
         	loger.info("excludedUrl = "+url);
             if (requestUri.endsWith(url)) {
-            	
                 return true;
             }
         }
-        
         HttpSession session = arg0.getSession();
-        if (session.getAttribute("username") == null) {
-            System.out.println(arg0.getContextPath());
-            arg1.sendRedirect(arg0.getContextPath() + "/tologin");
+        if (session.getAttribute("userName") == null) {
+        	loger.info(arg0.getContextPath());
+            arg1.sendRedirect(arg0.getContextPath() + "/login");
         }else {
-			
         	return true;
 		}
         return false;

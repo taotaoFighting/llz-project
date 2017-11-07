@@ -5,7 +5,7 @@
 
 .food-row{
 	width: 60%;
-	border-bottom: solid 1px #ff8f33;
+	border-bottom: solid 1px #18a689;
 }
 
 .food-img{
@@ -16,9 +16,33 @@
 	padding-left: 3%;
 }
 .title{
-	color: #ff8f33;
+	/*color: #18a689;*/
 }
 
 .lable-div{
 	margin-top: 8px;
+}
+.food-content{
+	margin-left: 3%;
+	width: 94%;
+}
+.card{
+	margin-left: 2%;
+	margin-top: 2%;
+	width: 98%;
+	height:98%;
+	border: solid 1px rgb(255, 143, 51);
+	font-size: 10px;
+}
+.desc{
+	width:'50%';
+	height:'100%',;
+	margin-left: 1%;
+	padding: 5px;
+    border-left: solid 1px rgb(255, 143, 51);
+}
+
+.time{
+	position: absolute;
+	bottom: 0px;
 }
